@@ -1,4 +1,4 @@
-# casey962.github.io
+# CaseyDraper.github.io
 Casey Draper/cadraper@my.waketech.edu
 
 this is my school account
