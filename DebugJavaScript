@@ -40,15 +40,15 @@
                 return;
             }
 
-	    const monthlyRate = annualRate / 100 / 12;
+	    const monthlyRate =Rate / 100 / 12;
 
 	    const years = parseInt(document.getElementById("years).value);
 
             // Call the power funtion, pow, from Math
-            const monthlyRate = Math.pw(1 + rate, years * 12);
+            const monthlyRate = Math.pow(1 + rate, years * 12);
 
   
-            const monthlyPayment = (principal * rate * monthlyRate) / (monthlyRate - 1);
+            const monthlyPayment = (rate/ 12);
             document.getElementById("result").innerText = `Your monthly payment is $${monthlyPayment.toFixed(2)}`;
         }
     </script>
