@@ -33,7 +33,6 @@
             const principal = parseFloat(document.getElementById("principal").value);
 
             // update rate from the box
-            const rate;
             const rate = parseFloat(document.getElementById("rate").value / 100);
             // get the years to calculate
             if (rate === 0) {
