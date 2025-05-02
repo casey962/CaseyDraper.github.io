@@ -41,3 +41,86 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gradebook</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Gradebook</h1>
+    <table id="gradebook">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Assignment 1</th>
+                <th>Assignment 2</th>
+                <th>Assignment 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically added later -->
+        </tbody>
+    </table>
+    <script src="gradebook.js"></script>
+</body>
+</html>
+
+function fetchGradeData() {
+
+        const response = await fetch('/grades'); 
+        const data = await response.json();       
+
+        console.log("Populating gradebook with data:", data);
+        let tableElm = document.getElementById("gradebook");
+
+        data.forEach(function (assignment) {
+            let row = document.createElement("tr");
+
+            
+            let nameCell = document.createElement("td");
+            nameCell.textContent = assignment.student_name;  
+            row.appendChild(nameCell);
+
+ 
+            let gradeCell = document.createElement("td");
+            gradeCell.textContent = assignment.total_grade;
+            row.appendChild(gradeCell);
+
+            tableElm.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Error fetching grade data:", error);
+    }
+}
+
+app.get('/grades', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT student_name, assignment1, assignment2, assignment3 FROM grades');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+})
+
+
